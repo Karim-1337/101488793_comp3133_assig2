@@ -1,0 +1,30 @@
+services:
+  mongodb:
+    image: mongo:7
+    # Host 27018 avoids clash with a local Windows MongoDB on 27017 (Compass would show empty DBs).
+    ports:
+      - '27018:27017'
+    volumes:
+      - mongo_data:/data/db
+
+  backend:
+    build: ./backend
+    ports:
+      - '5000:5000'
+    environment:
+      MONGO_URI: mongodb://mongodb:27017/comp3133_assignment2
+      JWT_SECRET: docker-dev-secret-change-for-production
+      CLIENT_ORIGIN: http://localhost:4200
+      PUBLIC_BASE_URL: http://localhost:5000
+    depends_on:
+      - mongodb
+
+  frontend:
+    build: ./frontend
+    ports:
+      - '4200:80'
+    depends_on:
+      - backend
+
+volumes:
+  mongo_data:

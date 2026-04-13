@@ -1,0 +1,36 @@
+<h1 class="h3 mb-4">View Employee Details</h1>
+
+@if (loading) {
+  <div class="text-center py-5"><mat-spinner /></div>
+} @else if (error) {
+  <p class="text-danger">{{ error }}</p>
+  <a mat-stroked-button routerLink="/employees">Back to list</a>
+} @else if (employee) {
+  <mat-card appearance="outlined" appCardHover>
+    <mat-card-content class="d-flex flex-column flex-md-row gap-4 pt-4">
+      @if (employee.profilePictureUrl) {
+        <div class="text-center text-md-start">
+          <img [src]="employee.profilePictureUrl" alt="" class="profile-img rounded" />
+        </div>
+      }
+      <dl class="row mb-0 flex-grow-1">
+        <dt class="col-sm-4">Full name</dt>
+        <dd class="col-sm-8">{{ employee | fullName }}</dd>
+        <dt class="col-sm-4">Employee First Name</dt>
+        <dd class="col-sm-8">{{ employee.firstName }}</dd>
+        <dt class="col-sm-4">Employee Last Name</dt>
+        <dd class="col-sm-8">{{ employee.lastName }}</dd>
+        <dt class="col-sm-4">Employee Email Id</dt>
+        <dd class="col-sm-8">{{ employee.email }}</dd>
+        <dt class="col-sm-4">Department</dt>
+        <dd class="col-sm-8">{{ employee.department || '—' }}</dd>
+        <dt class="col-sm-4">Position</dt>
+        <dd class="col-sm-8">{{ employee.position || '—' }}</dd>
+      </dl>
+    </mat-card-content>
+    <mat-card-actions class="px-3 pb-3">
+      <a mat-stroked-button routerLink="/employees">Back</a>
+      <a mat-flat-button color="primary" [routerLink]="['/employees', employee.id, 'edit']">Edit</a>
+    </mat-card-actions>
+  </mat-card>
+}

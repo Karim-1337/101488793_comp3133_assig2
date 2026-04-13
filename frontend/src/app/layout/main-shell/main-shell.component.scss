@@ -1,0 +1,18 @@
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.toolbar-title {
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.flex-grow-1 {
+  flex: 1 1 auto;
+}
+
+::ng-deep a.active-nav {
+  background-color: rgba(255, 255, 255, 0.12);
+}

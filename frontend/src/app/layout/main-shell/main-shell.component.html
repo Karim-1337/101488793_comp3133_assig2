@@ -1,0 +1,18 @@
+<mat-toolbar color="primary" class="toolbar shadow-sm">
+  <mat-icon class="me-2" aria-hidden="true">business</mat-icon>
+  <span class="toolbar-title">Employee Management App</span>
+  <span class="flex-grow-1"></span>
+  @if (username) {
+    <span class="d-none d-md-inline me-3 small opacity-90">{{ username }}</span>
+  }
+  <a mat-button routerLink="/employees" routerLinkActive="active-nav" [routerLinkActiveOptions]="{ exact: true }">Employees</a>
+  <a mat-button routerLink="/employees/search" routerLinkActive="active-nav">Search</a>
+  <a mat-button routerLink="/employees/add" routerLinkActive="active-nav">Add Employee</a>
+  <button mat-icon-button type="button" (click)="logout()" aria-label="Logout">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
+
+<main class="container py-3 py-md-4">
+  <router-outlet />
+</main>
