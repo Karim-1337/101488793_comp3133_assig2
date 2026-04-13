@@ -53,12 +53,12 @@ export class EmployeeViewComponent implements OnInit {
       return;
     }
     this.apollo
-      .watchQuery<{ employee: Employee | null }>({
+      .query<{ employee: Employee | null }>({
         query: EMPLOYEE,
         variables: { id },
         fetchPolicy: 'network-only',
       })
-      .valueChanges.subscribe({
+      .subscribe({
         next: (res) => {
           this.loading = false;
           this.employee = (res.data?.employee ?? null) as Employee | null;
